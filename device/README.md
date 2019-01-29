@@ -46,13 +46,13 @@ ST-Link v2.1 programmer (any ST Nucleo board will do).
 
 Once programmed, connect the STM32F042 to an iCE40 FPGA:
 
-*PA0 = CRST
-*PA1 = CDN
-*PA2 = diagnostic serial port
-*PA4 = CS
-*PA5 = SCK
-*PA6 = MISO (connect to SO)
-*PA7 = MOSI (connect to SI)
+* PA0 = CRST
+* PA1 = CDN
+* PA2 = diagnostic serial port
+* PA4 = CS
+* PA5 = SCK
+* PA6 = MISO (connect to SO)
+* PA7 = MOSI (connect to SI)
 
 Using the host application (elsewhere in this repository) download a 
 bitstream:
