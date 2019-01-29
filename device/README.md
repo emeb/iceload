@@ -6,18 +6,18 @@ creates a USB CDC class connection to a host PC and accepts binary data
 which is loaded into an iCE40 FPGA. The data is packaged with minimal
 formatting consisting of:
 
-Byte 0: letter 's'
-Bytes 1-4: 32-bit data length (in bytes) with MS-byte first
-Bytes 5-N: raw binary data of the iCE40 bitstream
+* Byte 0: letter 's'
+* Bytes 1-4: 32-bit data length (in bytes) with MS-byte first
+* Bytes 5-N: raw binary data of the iCE40 bitstream
 
-After detecting the initial 's' and length header the application begins
-by issuing a CRST signal to the FPGA, then toggling the CS line to flag
-that it will load into SRAM. Subsequently, the received bytes are sent
-via SPI at roughly 6Mbps. After all received data is sent via SPI then an
-additional 56 bits of '1' data are transmitted and the CS line is raised.
-The state of the 'CDN' pin is monitored to determine if the configuration
-was successful and error status is sent back to the host application with
-the following meanings:
+After detecting the initial 's' and length header, the application begins
+by dropping the CRST signal to the FPGA, then dropping the CS line to flag
+that it will load into SRAM and raising CRST. Subsequently, the received
+bytes are sent via SPI at roughly 6Mbps. After all received data is sent
+via SPI then the CS line is raised and an additional 56 bits of '1' data
+are transmitted. The state of the 'CDN' pin is monitored to determine if the
+configuration was successful and error status is sent back to the host
+application with the following meanings:
 
 * No bits set - success
 * bit 0 set - CDN didn't deassert at initial reset.
